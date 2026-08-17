@@ -1,0 +1,237 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "TDL — Task Development List",
+    "subtitle": "Project data as a single source of truth → generators, integrations, and Cloudflare runtime",
+    "output": "docs/tdl.html",
+    "visual_preset": "signal-flow",
+    "quality_profile": "showcase",
+    "animation": "trace"
+  },
+  "components": [
+    {
+      "id": "developer",
+      "type": "external",
+      "label": "Developer",
+      "sublabel": "plans · tasks · project context",
+      "pos": [40, 300],
+      "size": [130, 64]
+    },
+    {
+      "id": "web",
+      "type": "frontend",
+      "label": "TDL Web App",
+      "sublabel": "React 19 · Vite",
+      "pos": [220, 300],
+      "size": [150, 64],
+      "tag": "project workspace"
+    },
+    {
+      "id": "project",
+      "type": "messagebus",
+      "label": "Project Model",
+      "sublabel": "single source of truth",
+      "pos": [430, 300],
+      "size": [160, 64],
+      "tag": "core"
+    },
+    {
+      "id": "tasks",
+      "type": "backend",
+      "label": "Tasks",
+      "sublabel": "status · execution",
+      "pos": [430, 110],
+      "size": [130, 60]
+    },
+    {
+      "id": "milestones",
+      "type": "backend",
+      "label": "Milestones",
+      "sublabel": "goals · roadmap",
+      "pos": [610, 110],
+      "size": [130, 60]
+    },
+    {
+      "id": "progress",
+      "type": "backend",
+      "label": "Progress",
+      "sublabel": "completion state",
+      "pos": [790, 110],
+      "size": [130, 60]
+    },
+    {
+      "id": "releases",
+      "type": "backend",
+      "label": "Releases",
+      "sublabel": "delivery history",
+      "pos": [970, 110],
+      "size": [130, 60]
+    },
+    {
+      "id": "worker",
+      "type": "cloud",
+      "label": "Cloudflare Worker",
+      "sublabel": "TDL API runtime",
+      "pos": [650, 300],
+      "size": [160, 64],
+      "tag": "serverless"
+    },
+    {
+      "id": "storage",
+      "type": "database",
+      "label": "Project Storage",
+      "sublabel": "persistent project data",
+      "pos": [880, 300],
+      "size": [160, 64]
+    },
+    {
+      "id": "plugins",
+      "type": "messagebus",
+      "label": "Plugin / Generator Layer",
+      "sublabel": "extensible project outputs",
+      "pos": [650, 470],
+      "size": [180, 64],
+      "tag": "plugin-first"
+    },
+    {
+      "id": "readme",
+      "type": "frontend",
+      "label": "README / Files",
+      "sublabel": "dynamic project blocks",
+      "pos": [900, 430],
+      "size": [155, 60]
+    },
+    {
+      "id": "atdoc",
+      "type": "frontend",
+      "label": "AtDoc Output",
+      "sublabel": "semantic document IR",
+      "pos": [900, 510],
+      "size": [155, 60]
+    },
+    {
+      "id": "archify",
+      "type": "frontend",
+      "label": "Development Map",
+      "sublabel": "Archify architecture view",
+      "pos": [1090, 470],
+      "size": [170, 64],
+      "tag": "experimental"
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "TDL project context",
+      "wraps": ["project", "tasks", "milestones", "progress", "releases"]
+    },
+    {
+      "kind": "region",
+      "label": "Cloudflare runtime",
+      "wraps": ["worker", "storage"]
+    }
+  ],
+  "connections": [
+    {
+      "from": "developer",
+      "to": "web",
+      "variant": "emphasis"
+    },
+    {
+      "from": "web",
+      "to": "project",
+      "label": "manage",
+      "variant": "emphasis"
+    },
+    {
+      "from": "project",
+      "to": "tasks",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "from": "project",
+      "to": "milestones",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "from": "project",
+      "to": "progress",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "from": "project",
+      "to": "releases",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "from": "project",
+      "to": "worker",
+      "label": "API",
+      "variant": "emphasis"
+    },
+    {
+      "from": "worker",
+      "to": "storage",
+      "label": "persist",
+      "variant": "emphasis"
+    },
+    {
+      "from": "project",
+      "to": "plugins",
+      "label": "generate",
+      "variant": "emphasis",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "from": "plugins",
+      "to": "readme",
+      "label": "render"
+    },
+    {
+      "from": "plugins",
+      "to": "atdoc",
+      "label": "render"
+    },
+    {
+      "from": "plugins",
+      "to": "archify",
+      "label": "architecture IR",
+      "variant": "emphasis"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Single source of truth",
+      "items": [
+        "Project data drives tasks, milestones, progress, and releases",
+        "The UI manages project context instead of duplicated documents",
+        "Cloudflare Worker provides the serverless API boundary"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Generate everywhere",
+      "items": [
+        "Plugin and generator outputs derive from the same project model",
+        "README / Files can expose dynamic project blocks",
+        "AtDoc remains a semantic document output path"
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "Development Map experiment",
+      "items": [
+        "Archify adds an interactive spatial view of the project architecture",
+        "TDL can later overlay task, milestone, and progress state on architecture nodes",
+        "The first deployment is intentionally static and read-only"
+      ]
+    }
+  ]
+}
