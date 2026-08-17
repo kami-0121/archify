@@ -183,7 +183,7 @@
     { "from": "project", "to": "plugins", "label": "generate", "variant": "emphasis", "fromSide": "bottom", "toSide": "top" },
     { "from": "plugins", "to": "readme", "label": "render" },
     { "from": "plugins", "to": "atdoc", "label": "render" },
-    { "from": "plugins", "to": "archify", "label": "architecture IR", "variant": "emphasis" }
+    { "from": "plugins", "to": "archify", "label": "architecture IR", "variant": "emphasis", "labelDy": 12 }
   ],
   "cards": [
     {
