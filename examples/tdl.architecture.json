@@ -7,7 +7,11 @@
     "output": "docs/tdl.html",
     "visual_preset": "signal-flow",
     "quality_profile": "showcase",
-    "animation": "trace"
+    "animation": "trace",
+    "repository": {
+      "url": "https://github.com/WEDC-Studio-Official/TDL",
+      "revision": "00a67404fff39c30c8c64354567aea5c2e60f24d"
+    }
   },
   "components": [
     {
@@ -25,7 +29,10 @@
       "sublabel": "React 19 · Vite",
       "pos": [220, 300],
       "size": [150, 64],
-      "tag": "project workspace"
+      "tag": "project workspace",
+      "sources": [
+        { "path": "TDL/package.json", "label": "frontend package" }
+      ]
     },
     {
       "id": "project",
@@ -34,7 +41,10 @@
       "sublabel": "single source of truth",
       "pos": [430, 300],
       "size": [160, 64],
-      "tag": "core"
+      "tag": "core",
+      "sources": [
+        { "path": "README.md", "label": "product model" }
+      ]
     },
     {
       "id": "tasks",
@@ -42,7 +52,10 @@
       "label": "Tasks",
       "sublabel": "status · execution",
       "pos": [430, 110],
-      "size": [130, 60]
+      "size": [130, 60],
+      "sources": [
+        { "path": "README.md", "label": "tasks" }
+      ]
     },
     {
       "id": "milestones",
@@ -50,7 +63,10 @@
       "label": "Milestones",
       "sublabel": "goals · roadmap",
       "pos": [610, 110],
-      "size": [130, 60]
+      "size": [130, 60],
+      "sources": [
+        { "path": "README.md", "label": "milestones" }
+      ]
     },
     {
       "id": "progress",
@@ -58,7 +74,10 @@
       "label": "Progress",
       "sublabel": "completion state",
       "pos": [790, 110],
-      "size": [130, 60]
+      "size": [130, 60],
+      "sources": [
+        { "path": "README.md", "label": "progress" }
+      ]
     },
     {
       "id": "releases",
@@ -66,7 +85,10 @@
       "label": "Releases",
       "sublabel": "delivery history",
       "pos": [970, 110],
-      "size": [130, 60]
+      "size": [130, 60],
+      "sources": [
+        { "path": "README.md", "label": "releases" }
+      ]
     },
     {
       "id": "worker",
@@ -75,15 +97,23 @@
       "sublabel": "TDL API runtime",
       "pos": [650, 300],
       "size": [160, 64],
-      "tag": "serverless"
+      "tag": "serverless",
+      "sources": [
+        { "path": "Worker/wrangler.jsonc", "label": "worker config" },
+        { "path": "Worker/package.json", "label": "worker package" }
+      ]
     },
     {
       "id": "storage",
       "type": "database",
-      "label": "Project Storage",
+      "label": "D1 · tdl-db",
       "sublabel": "persistent project data",
       "pos": [880, 300],
-      "size": [160, 64]
+      "size": [160, 64],
+      "sources": [
+        { "path": "Worker/wrangler.jsonc", "label": "D1 binding" },
+        { "path": "Worker/schema.sql", "label": "database schema" }
+      ]
     },
     {
       "id": "plugins",
@@ -92,7 +122,10 @@
       "sublabel": "extensible project outputs",
       "pos": [650, 470],
       "size": [180, 64],
-      "tag": "plugin-first"
+      "tag": "plugin-first",
+      "sources": [
+        { "path": "README.md", "label": "plugin system" }
+      ]
     },
     {
       "id": "readme",
@@ -100,7 +133,10 @@
       "label": "README / Files",
       "sublabel": "dynamic project blocks",
       "pos": [900, 430],
-      "size": [155, 60]
+      "size": [155, 60],
+      "sources": [
+        { "path": "README.md", "label": "README generator" }
+      ]
     },
     {
       "id": "atdoc",
@@ -108,7 +144,10 @@
       "label": "AtDoc Output",
       "sublabel": "semantic document IR",
       "pos": [900, 510],
-      "size": [155, 60]
+      "size": [155, 60],
+      "sources": [
+        { "path": "README.md", "label": "AtDoc generator" }
+      ]
     },
     {
       "id": "archify",
@@ -133,77 +172,18 @@
     }
   ],
   "connections": [
-    {
-      "from": "developer",
-      "to": "web",
-      "variant": "emphasis"
-    },
-    {
-      "from": "web",
-      "to": "project",
-      "label": "manage",
-      "variant": "emphasis"
-    },
-    {
-      "from": "project",
-      "to": "tasks",
-      "fromSide": "top",
-      "toSide": "bottom"
-    },
-    {
-      "from": "project",
-      "to": "milestones",
-      "fromSide": "top",
-      "toSide": "bottom"
-    },
-    {
-      "from": "project",
-      "to": "progress",
-      "fromSide": "top",
-      "toSide": "bottom"
-    },
-    {
-      "from": "project",
-      "to": "releases",
-      "fromSide": "top",
-      "toSide": "bottom"
-    },
-    {
-      "from": "project",
-      "to": "worker",
-      "label": "API",
-      "variant": "emphasis"
-    },
-    {
-      "from": "worker",
-      "to": "storage",
-      "label": "persist",
-      "variant": "emphasis"
-    },
-    {
-      "from": "project",
-      "to": "plugins",
-      "label": "generate",
-      "variant": "emphasis",
-      "fromSide": "bottom",
-      "toSide": "top"
-    },
-    {
-      "from": "plugins",
-      "to": "readme",
-      "label": "render"
-    },
-    {
-      "from": "plugins",
-      "to": "atdoc",
-      "label": "render"
-    },
-    {
-      "from": "plugins",
-      "to": "archify",
-      "label": "architecture IR",
-      "variant": "emphasis"
-    }
+    { "from": "developer", "to": "web", "variant": "emphasis" },
+    { "from": "web", "to": "project", "label": "manage", "variant": "emphasis" },
+    { "from": "project", "to": "tasks", "fromSide": "top", "toSide": "bottom" },
+    { "from": "project", "to": "milestones", "fromSide": "top", "toSide": "bottom" },
+    { "from": "project", "to": "progress", "fromSide": "top", "toSide": "bottom" },
+    { "from": "project", "to": "releases", "fromSide": "top", "toSide": "bottom" },
+    { "from": "project", "to": "worker", "label": "API", "variant": "emphasis" },
+    { "from": "worker", "to": "storage", "label": "persist", "variant": "emphasis" },
+    { "from": "project", "to": "plugins", "label": "generate", "variant": "emphasis", "fromSide": "bottom", "toSide": "top" },
+    { "from": "plugins", "to": "readme", "label": "render" },
+    { "from": "plugins", "to": "atdoc", "label": "render" },
+    { "from": "plugins", "to": "archify", "label": "architecture IR", "variant": "emphasis" }
   ],
   "cards": [
     {
@@ -217,11 +197,11 @@
     },
     {
       "dot": "emerald",
-      "title": "Generate everywhere",
+      "title": "Repository evidence",
       "items": [
-        "Plugin and generator outputs derive from the same project model",
-        "README / Files can expose dynamic project blocks",
-        "AtDoc remains a semantic document output path"
+        "Core nodes link back to a pinned TDL Git revision",
+        "Frontend, Worker, D1, schema, and product model expose source evidence",
+        "This tests how far Archify can act as a navigable project map"
       ]
     },
     {
